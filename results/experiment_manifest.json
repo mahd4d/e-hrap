@@ -1,0 +1,70 @@
+{
+  "created": "2026-08-14T09:57:03.510128",
+  "device": "cuda",
+  "torch_version": "2.6.0+cu126",
+  "torchvision_version": "0.21.0+cu126",
+  "configuration": {
+    "datasets": [
+      "CIFAR10",
+      "CIFAR100",
+      "SVHN",
+      "FashionMNIST",
+      "MNIST"
+    ],
+    "architectures": [
+      "ResNet20",
+      "VGG11BN",
+      "SimpleCNN"
+    ],
+    "methods": [
+      "Uniform-Magnitude",
+      "Adaptive-Magnitude",
+      "Adaptive-Correlation",
+      "E-HRAP"
+    ],
+    "rates": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5
+    ],
+    "seeds": [
+      42
+    ],
+    "data_root": "./data",
+    "output_dir": "./pruning_results/full_grid",
+    "batch_size": 128,
+    "workers": 2,
+    "baseline_epochs": 15,
+    "fine_tune_epochs": 10,
+    "baseline_lr": 0.001,
+    "fine_tune_lr": 0.0005,
+    "alpha": 0.7,
+    "beta": 0.3,
+    "sensitivity_samples": 300,
+    "correlation_samples": 200,
+    "latency_warmup": 20,
+    "latency_repeats": 100,
+    "no_download": false,
+    "full_grid": true,
+    "quick": false
+  },
+  "dataset_references": {
+    "CIFAR10": "A. Krizhevsky, Learning Multiple Layers of Features from Tiny Images, 2009.",
+    "CIFAR100": "A. Krizhevsky, Learning Multiple Layers of Features from Tiny Images, 2009.",
+    "SVHN": "Y. Netzer et al., Reading Digits in Natural Images with Unsupervised Feature Learning, 2011.",
+    "FashionMNIST": "H. Xiao, K. Rasul, and R. Vollgraf, Fashion-MNIST, arXiv:1708.07747, 2017.",
+    "MNIST": "Y. LeCun et al., Gradient-Based Learning Applied to Document Recognition, Proc. IEEE, 1998."
+  },
+  "architecture_references": {
+    "ResNet20": "K. He et al., Deep Residual Learning for Image Recognition, CVPR, 2016 (CIFAR 6n+2 variant, n=3).",
+    "VGG11BN": "K. Simonyan and A. Zisserman, Very Deep Convolutional Networks, ICLR, 2015.",
+    "SimpleCNN": "Custom three-layer CNN; fully specified in the experiment manifest."
+  },
+  "architecture_definitions": {
+    "SimpleCNN": "Conv64-BN-ReLU-Pool, Conv128-BN-ReLU-Pool, Conv256-BN-ReLU-Pool, FC512, FC(classes).",
+    "VGG11BN": "VGG-11 convolution layout with BatchNorm and adaptive global average pooling for 32x32 inputs.",
+    "ResNet20": "CIFAR 6n+2 ResNet with n=3 blocks per stage and widths 16/32/64; only block-internal conv1 filters are structurally removed."
+  }
+}
